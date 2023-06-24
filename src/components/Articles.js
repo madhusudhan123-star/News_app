@@ -1,13 +1,21 @@
 import { React, useState } from "react";
-
+import no_image from "../materials/no_image.jpeg";
 const Articles = ({ datas }) => {
   const [number, setnumber] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  // console.log(datas);
+  const handleImageError = (event) => {
+    // Prevent infinite error loop
+    event.target.src = no_image; // Replace with your fallback image URL
+  };
   return (
     <div>
       <div className="flex justify-evenly flex-wrap">
         <ul className="text-black w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2 3xl:w-1/2 h-full mx-2 bg-slate-100">
           {datas &&
             datas.map((data) => {
+              {
+                /* console.log(data.urlToImage);   */
+              }
               return (
                 <li
                   key={data.publishedAt}
@@ -25,7 +33,11 @@ const Articles = ({ datas }) => {
                   <p className="text-black text-sm mt-1 mb-5">
                     Content: {data.content}
                   </p>
-                  <img src={data.urlToImage} className=" w-1/2" />
+                  <img
+                    src={data.urlToImage !== null ? data.urlToImage : no_image}
+                    className=" w-1/2"
+                    onError={handleImageError}
+                  />
                 </li>
               );
             })}

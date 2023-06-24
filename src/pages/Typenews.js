@@ -11,7 +11,7 @@ const Typenews = () => {
       .then((res) => res.json())
       .then((data) => {
         const code = data.country_code;
-        if (code != undefined) {
+        if (code !== undefined) {
           fetch(
             `https://newsapi.org/v2/top-headlines?country=${code}&category=${id}&apiKey=d29d502291434e58810d212d1b71638c`
           )
